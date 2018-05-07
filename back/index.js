@@ -40,4 +40,6 @@ io.on('connection', (socket) => {
 
     socket.emit('number:change', globalNumber)
 
+    socket.on('text', (text) => {console.log(text)})
+
 });

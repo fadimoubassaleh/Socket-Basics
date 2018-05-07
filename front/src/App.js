@@ -19,7 +19,8 @@ class App extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.message)
+    console.log(this.state.message);
+    this.state.socket.emit('text', this.state.message)
   }
 
   componentDidMount() {
