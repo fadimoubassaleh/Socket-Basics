@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import io from 'socket.io-client';
 import './App.css';
 
@@ -20,7 +19,6 @@ class App extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.message);
     this.state.socket.emit('text', this.state.message)
   }
 
@@ -42,11 +40,6 @@ class App extends Component {
     })
 
     socket.on('text', (messages) => {
-      console.log(messages)
-      // let finalList = <h1>Our Messages</h1>
-      // for (let i = 0; i < messages.length; i++) {
-      //   finalList += messages[i]
-      // }
       this.setState({
         messages: messages
       })
@@ -58,8 +51,6 @@ class App extends Component {
     if (!messages) {
       return
     } else {
-      // messages = messages.conversations
-      console.log(messages)
       messages.map((message) => {
         return (
           <ul>{message}</ul>
@@ -83,7 +74,8 @@ class App extends Component {
             return (
               <ul>{message}</ul>
             )
-          })}
+          })
+        }
       </div>
     )
   }
