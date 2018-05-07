@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cat-names": "^1.0.2",
     "concurrently": "^3.5.1",
     "npm-run-all": "^4.1.3"
   }

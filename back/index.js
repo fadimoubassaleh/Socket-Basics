@@ -1,7 +1,7 @@
 //our server
 const http = require('http')
 const server = http.createServer()
-
+const catNames = require('cat-names');
 const handleRequest = (req, res) => {
     res.end('ok!')
 }
@@ -17,7 +17,12 @@ let globalNumber = 0
 
 io.on('connection', (socket) => {
 
-    console.log('a user connected')
+    const username = catNames.random()
+    console.log('a user called ' + username + ' has connected')
+
+    io.emit('user:new', username)
+
+    socket.emit('user:me', username)
 
     socket.on('disconnect', () => {
         console.log('user disconnected');

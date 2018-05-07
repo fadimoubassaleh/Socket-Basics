@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import io from 'socket.io-client';
 import './App.css';
 
@@ -16,6 +16,13 @@ class App extends Component {
       this.setState({ globalNumber })
     })
 
+    socket.on('user:new', (username) => {
+      console.log('a user called ' + username + ' has connected')
+    })
+
+    socket.on('user:me', (username) => {
+      this.setState({ username })
+    })
   }
 
   onIncrement = () => this.state.socket.emit('increment')
@@ -23,7 +30,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        hello
+        {this.state.username}
       </div>
     )
   }
