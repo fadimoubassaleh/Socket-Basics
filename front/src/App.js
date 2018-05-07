@@ -5,7 +5,22 @@ import './App.css';
 
 class App extends Component {
 
-  state = { socket: null, globalNumber: 0 }
+  state = { 
+    socket: null, 
+    globalNumber: 0, 
+    message: null
+  }
+
+  handleMessageValue = (e) =>{
+    this.setState({
+      message: e.target.value
+    })
+  }
+
+  formSubmit = (event) => {
+    event.preventDefault();
+    console.log(this.state.message)
+  }
 
   componentDidMount() {
     const socket = io('http://localhost:8888');
@@ -30,10 +45,10 @@ class App extends Component {
   render() {
     return (
       <div className='main-div' >
-        <p4>username: {this.state.username} </p4>
-        <form>
-          <input type='text'/>
-          <button>send</button>
+        <h1>username: {this.state.username} </h1>
+        <form onSubmit={this.formSubmit}>
+          <input type='text' onChange={this.handleMessageValue} />
+          <button type='submit' >send</button>
         </form>
       </div>
     )
