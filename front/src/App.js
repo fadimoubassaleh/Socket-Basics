@@ -29,8 +29,12 @@ class App extends Component {
   onDecrement = () => this.state.socket.emit('decrement')
   render() {
     return (
-      <div>
-        {this.state.username}
+      <div className='main-div' >
+        <p4>username: {this.state.username} </p4>
+        <form>
+          <input type='text'/>
+          <button>send</button>
+        </form>
       </div>
     )
   }
