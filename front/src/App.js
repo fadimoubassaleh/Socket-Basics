@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import io from 'socket.io-client';
 import './App.css';
 
 class App extends Component {
-
   state = {
     socket: null,
     globalNumber: 0,
@@ -20,11 +18,20 @@ class App extends Component {
 
   formSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.message);
-    this.state.socket.emit('text', this.state.message)
+    const message = { user: this.state.username, message: this.state.message }
+    this.setState({
+      message: ''
+    })
+    if (this.state.message === "" || this.state.message === null) {
+      console.log('null')
+      return
+    } else {
+      this.state.socket.emit('text', message)
+    }
   }
 
   componentDidMount() {
+
     const socket = io('http://localhost:8888');
 
     this.setState({ socket })
@@ -41,49 +48,34 @@ class App extends Component {
       this.setState({ username })
     })
 
-    socket.on('text', (messages) => {
-      console.log(messages)
-      // let finalList = <h1>Our Messages</h1>
-      // for (let i = 0; i < messages.length; i++) {
-      //   finalList += messages[i]
-      // }
-      this.setState({
-        messages: messages
-      })
+    socket.on('text', (message) => {
+      const messages = [...this.state.messages, message]
+      this.setState({messages})
+      // const newMesseges = this.state.messages.push(message)
+      // console.log(newMesseges)
+      // this.setState({messages: newMesseges})
+      // console.log(this.state.messages)
     })
   }
 
-  showMessages = () => {
-    let messages = this.state.messages
-    if (!messages) {
-      return
-    } else {
-      // messages = messages.conversations
-      console.log(messages)
-      messages.map((message) => {
-        return (
-          <ul>{message}</ul>
-        )
-      })
-    }
-  }
   onIncrement = () => this.state.socket.emit('increment')
   onDecrement = () => this.state.socket.emit('decrement')
   render() {
     return (
       <div className='main-div' >
-        {console.log('my name is ' + this.state.username)}
         <h1>username: {this.state.username} </h1>
         <form onSubmit={this.formSubmit}>
-          <input type='text' onChange={this.handleMessageValue} />
+          <input type='text' onChange={this.handleMessageValue} value={this.state.message} />
           <button type='submit' >send</button>
         </form>
         {
-          this.state.messages.map((message) => {
+          this.state.messages.map((e, key) => {
             return (
-              <ul>{message}</ul>
+              <ul key={key}>{e.user} sent: {e.message}</ul>
             )
-          })}
+          })
+
+        }
       </div>
     )
   }

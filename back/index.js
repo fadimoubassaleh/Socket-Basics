@@ -18,7 +18,6 @@ let globalNumber = 0
 
 io.on('connection', (socket) => {
 
-    let messages = []
     const username = catNames.random()
     console.log('a user called ' + username + ' has connected')
 
@@ -41,12 +40,9 @@ io.on('connection', (socket) => {
     });
 
     socket.emit('number:change', globalNumber)
-
+    
     socket.on('text', (text) => {
-        console.log(text)
-        messages.push(text)
-        console.log(messages)
-        io.emit('text', (messages))
+        io.emit('text', (text))
     })
 
 });
