@@ -1,5 +1,13 @@
 # Basic chat Application 
 
+## using
+
+```
+- create-react-app
+- node
+- socket.io
+```
+
 ## Instruction
 
 ```
