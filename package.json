@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd back && npm start",
     "client": "cd front && npm start",
-    "start": "concurrently --kill-others-on-fail --names \"server client\" \"npm run server\" \"npm run client\""
+    "start": "concurrently --kill-others-on-fail --names \"server client\" \"npm run server\" \"npm run client\"",
+    "setup" : "cd front && npm install && cd .. && cd back && npm install && cd .. && npm install"
   },
   "author": "",
   "license": "ISC",
