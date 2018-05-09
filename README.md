@@ -1,7 +1,9 @@
 # Basic chat Application 
-    It's based on exersice in Github ripo : https://github.com/coditech/socket-basics
+
+It's based on exersice in Github ripo : https://github.com/coditech/socket-basics
 creating real time chat app, using socket.io .
 good example to learn basics of socket.io 
+
 
 
 ## using
