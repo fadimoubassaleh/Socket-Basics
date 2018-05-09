@@ -51,10 +51,6 @@ class App extends Component {
     socket.on('text', (message) => {
       const messages = [...this.state.messages, message]
       this.setState({messages})
-      // const newMesseges = this.state.messages.push(message)
-      // console.log(newMesseges)
-      // this.setState({messages: newMesseges})
-      // console.log(this.state.messages)
     })
   }
 
@@ -74,7 +70,6 @@ class App extends Component {
               <ul key={key}>{e.user} sent: {e.message}</ul>
             )
           })
-
         }
       </div>
     )
